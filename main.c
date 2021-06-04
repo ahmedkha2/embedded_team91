@@ -1,12 +1,11 @@
 #include "stdint.h"
-#include "stdint.h"
 #include "math.h"
 #include "C:/Keil/Labware/inc/tm4c123gh6pm.h"
 
-double rad(double x) 
-	{
+double rad(double x)
+{
     return x * 3.14159265359 / 180;
-	}
+}
 double calcdist(double latitude1, double longitude1, double latitude2, double longitude2)
 {
     double Y;
@@ -37,27 +36,27 @@ double calcdist(double latitude1, double longitude1, double latitude2, double lo
 }
 
 
-void systeminit (){}
-void init(){
-	uint32_t delay;
-	SYSCTL_RCGCGPIO_R |= 0x20;
-	delay=1;
-	GPIO_PORTF_LOCK_R = 0x4C4F434B;
-	GPIO_PORTF_CR_R = 0X1F;
-	GPIO_PORTF_DIR_R = 0x0E;
-	GPIO_PORTF_AFSEL_R = 0x0;
-	GPIO_PORTF_PCTL_R = 0x0;
-	GPIO_PORTF_AMSEL_R = 0x0;
-	GPIO_PORTF_DEN_R = 0X1F;
-	GPIO_PORTF_PUR_R = 0X11;
-	
+void systeminit() {}
+void init() {
+    uint32_t delay;
+    SYSCTL_RCGCGPIO_R |= 0x20;
+    delay = 1;
+    GPIO_PORTF_LOCK_R = 0x4C4F434B;
+    GPIO_PORTF_CR_R = 0X1F;
+    GPIO_PORTF_DIR_R = 0x0E;
+    GPIO_PORTF_AFSEL_R = 0x0;
+    GPIO_PORTF_PCTL_R = 0x0;
+    GPIO_PORTF_AMSEL_R = 0x0;
+    GPIO_PORTF_DEN_R = 0X1F;
+    GPIO_PORTF_PUR_R = 0X11;
+
 
 }
-int main(){
-	init();
-	while(1)
-	{
-	
-		
-	}
+int main() {
+    init();
+    while (1)
+    {
+
+
+    }
 }
