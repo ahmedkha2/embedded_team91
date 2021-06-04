@@ -1,5 +1,42 @@
 #include "stdint.h"
+#include "stdint.h"
+#include "math.h"
 #include "C:/Keil/Labware/inc/tm4c123gh6pm.h"
+
+double rad(double x) 
+	{
+    return x * 3.14159265359 / 180;
+	}
+double calcdist(double latitude1, double longitude1, double latitude2, double longitude2)
+{
+    double Y;
+    double sdlongitude;
+    double cdlongitude;
+    double slatitude1;
+    double clatitude1;
+    double slatitude2;
+    double clatitude2;
+    double Z;
+
+    Y = rad(longitude1 - longitude2);
+    sdlongitude = sin(Y);
+    cdlongitude = cos(Y);
+    latitude1 = rad(latitude1);
+    latitude2 = rad(latitude2);
+    slatitude1 = sin(latitude1);
+    clatitude1 = cos(latitude1);
+    slatitude2 = sin(latitude2);
+    clatitude2 = cos(latitude2);
+    Y = (clatitude1 * slatitude2) - (slatitude1 * clatitude2 * cdlongitude);
+    Y = (Y * Y);
+    Y += (clatitude2 * sdlongitude) * (clatitude2 * sdlongitude);
+    Y = sqrt(Y);
+    Z = (slatitude1 * slatitude2) + (clatitude1 * clatitude2 * cdlongitude);
+    Y = atan2(Y, Z);
+    return Y * 6372795;
+}
+
+
 void systeminit (){}
 void init(){
 	uint32_t delay;
@@ -20,17 +57,7 @@ int main(){
 	init();
 	while(1)
 	{
-	if((GPIO_PORTF_DATA_R&0x11)==0x01){
-		GPIO_PORTF_DATA_R = 0x08;
+	
+		
 	}
-	else if((GPIO_PORTF_DATA_R&0x11)==0x10){
-		GPIO_PORTF_DATA_R = 0x04;
-	}
-	else if((GPIO_PORTF_DATA_R&0x11)==0x0){
-		GPIO_PORTF_DATA_R = 0x02;
-	}
-	else{
-		GPIO_PORTF_DATA_R = 0x11;
-	}
-}
 }
