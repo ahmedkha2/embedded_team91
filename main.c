@@ -45,9 +45,32 @@ void discheck(double latitude1, double longitude1, double latitude2, double long
 
 void systeminit() {}
 void init() {
-    uint32_t delay;
-    SYSCTL_RCGCGPIO_R |= 0x20;
+    //Global ports initialization
+        uint32_t delay;
+    SYSCTL_RCGCGPIO_R |= 0x23;
     delay = 1;
+
+        //port A initialization
+    GPIO_PORTA_LOCK_R = 0x4C4F434B;
+    GPIO_PORTA_CR_R = 0XFF;
+    GPIO_PORTA_DIR_R = 0xE0;
+    GPIO_PORTA_AFSEL_R &= 0x1F;
+    GPIO_PORTA_PCTL_R = 0x0;
+    GPIO_PORTA_AMSEL_R = 0x0;
+    GPIO_PORTA_DEN_R = 0XFF;
+    GPIO_PORTA_PUR_R = 0X0;
+
+        //port B initialization
+    GPIO_PORTB_LOCK_R = 0x4C4F434B;
+    GPIO_PORTB_CR_R = 0XFF;
+    GPIO_PORTB_DIR_R = 0xFF;
+    GPIO_PORTB_AFSEL_R = 0x0;
+    GPIO_PORTB_PCTL_R = 0x0;
+    GPIO_PORTB_AMSEL_R = 0x0;
+    GPIO_PORTB_DEN_R = 0XFF;
+    GPIO_PORTB_PUR_R = 0X0;
+
+        //port F initialization
     GPIO_PORTF_LOCK_R = 0x4C4F434B;
     GPIO_PORTF_CR_R = 0X1F;
     GPIO_PORTF_DIR_R = 0x0E;
@@ -56,7 +79,6 @@ void init() {
     GPIO_PORTF_AMSEL_R = 0x0;
     GPIO_PORTF_DEN_R = 0X1F;
     GPIO_PORTF_PUR_R = 0X11;
-
 
 }
 int main() {
