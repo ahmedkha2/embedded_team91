@@ -41,6 +41,7 @@ void discheck(double latitude1, double longitude1, double latitude2, double long
     if (distance > 100) {
         GPIO_PORTF_DATA_R |= 0x08;
     }
+}
 
 void systeminit() {}
 void init() {
