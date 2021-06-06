@@ -45,10 +45,10 @@ void discheck(double latitude1, double longitude1, double latitude2, double long
 
 void systeminit() {}
 void init() {
-    //Global ports initialization
-        uint32_t delay;
-    SYSCTL_RCGCGPIO_R |= 0x23;
-    delay = 1;
+    //Global ports initialization   
+    SYSCTL_RCGCGPIO_R |= 0x23; //Activate port A,B,F
+    while(!(SYSCTL_PRGPIO_R&0x23)){};
+
 
         //port A initialization
     GPIO_PORTA_LOCK_R = 0x4C4F434B;
