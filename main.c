@@ -3,7 +3,7 @@
 #include "C:/Keil/Labware/inc/tm4c123gh6pm.h"
 
 double rad(double x)
-{
+{// converting degrees into radians
     return x * 3.14159265359 / 180;
 }
 double calcdist(double latitude1, double longitude1, double latitude2, double longitude2)
@@ -90,7 +90,7 @@ void discheck(int dist) {
                GPIO_PORTF_DATA_R |= 0x00;
         }
 }
-void delay(int d){
+void delay(int d){//d=delay in milliseconds
 	int d1,d2;
 	for(d1=0; d1<d; d1++){
 		for(d2=0; d2<3180; d2++){}
@@ -127,6 +127,8 @@ void SEG_distance_display(int dist){
     int j ;
     unsigned int k;
 
+
+    //transforming the number distance into 3 characters
     j = dist/100;
     char1 = 48 + j;
     dist = dist - j * 100;
@@ -161,7 +163,14 @@ int main() {
     init();
     while (1)
     {
-
+	int distance = 90;
+  	init();
+	
+	//turning the led on when ditance > 100
+	while(1){
+	SEG_distance_display(distance);
+	discheck(distance);
+	distance++;
 
     }
 }
