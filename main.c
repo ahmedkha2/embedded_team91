@@ -55,7 +55,7 @@ void init() {
     GPIO_PORTA_CR_R = 0XFF;
     GPIO_PORTA_DIR_R = 0xE0;
     GPIO_PORTA_AFSEL_R &= 0x1F;
-    GPIO_PORTA_PCTL_R = 0x0;
+    GPIO_PORTA_PCTL_R &= ~0xFFF00000;
     GPIO_PORTA_AMSEL_R = 0x0;
     GPIO_PORTA_DEN_R = 0XFF;
     GPIO_PORTA_PUR_R = 0X0;
@@ -81,6 +81,7 @@ void init() {
     GPIO_PORTF_PUR_R = 0X11;
 
 }
+
 int main() {
     init();
     while (1)
