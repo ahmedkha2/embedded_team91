@@ -81,6 +81,15 @@ void init() {
     GPIO_PORTF_PUR_R = 0X11;
 
 }
+void discheck(int dist) {
+
+    if (dist > 100) {
+        GPIO_PORTF_DATA_R |= 0x08;
+    }
+        else{
+               GPIO_PORTF_DATA_R |= 0x00;
+        }
+}
 
 int main() {
     init();
