@@ -34,15 +34,6 @@ double calcdist(double latitude1, double longitude1, double latitude2, double lo
     Y = atan2(Y, Z);
     return Y * 6372795;
 }
-void discheck(double latitude1, double longitude1, double latitude2, double longitude2) {
-
-    double distance;
-    distance = calcdist(latitude1, longitude1, latitude2, longitude2);
-    if (distance > 100) {
-        GPIO_PORTF_DATA_R |= 0x08;
-    }
-}
-
 void systeminit() {}
 void init() {
     //Global ports initialization   
@@ -86,9 +77,9 @@ void discheck(int dist) {
     if (dist > 100) {
         GPIO_PORTF_DATA_R |= 0x08;
     }
-        else{
+    else{
                GPIO_PORTF_DATA_R |= 0x00;
-        }
+    }
 }
 void delay(int d){//d=delay in milliseconds
 	int d1,d2;
@@ -173,4 +164,5 @@ int main() {
 	distance++;
 
     }
+}
 }
