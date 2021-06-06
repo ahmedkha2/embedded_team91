@@ -121,6 +121,42 @@ void SEG_data(unsigned char dat){
 	
 	delay(2);
 }
+void SEG_distance_display(int dist){ 
+    char char1,char2,char3;
+    char word[11] = {'D','i','s','t','a','n','c','e',' ','=',' '};
+    int j ;
+    unsigned int k;
+
+    j = dist/100;
+    char1 = 48 + j;
+    dist = dist - j * 100;
+    j = dist / 10; 
+    char2 = 48 + j;
+    dist = dist - j*10;
+    char3 = 48 + dist;
+
+    SEG_command(0x30);
+    SEG_command(0x38);
+    SEG_command(0x01);
+    SEG_command(0x0F);
+    SEG_command(0x80);
+
+    delay(500);
+
+    for (k = 0; k < 10; k++){
+        SEG_data(word[k]);
+        SEG_command(0x06);
+    }
+
+    SEG_data(char1);
+    SEG_command(0x06);
+    SEG_data(char2);
+    SEG_command(0x06);
+    SEG_data(char3);
+    SEG_command(0x06);
+
+    delay(500);
+}
 int main() {
     init();
     while (1)
