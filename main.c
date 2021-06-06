@@ -90,7 +90,37 @@ void discheck(int dist) {
                GPIO_PORTF_DATA_R |= 0x00;
         }
 }
+void delay(int d){
+	int d1,d2;
+	for(d1=0; d1<d; d1++){
+		for(d2=0; d2<3180; d2++){}
+	}
+}
 
+void SEG_command(unsigned char comm){
+	GPIO_PORTA_DATA_R&= 0x1F;
+	GPIO_PORTA_DATA_R|= 0x80;
+	GPIO_PORTB_DATA_R = comm;
+	
+	delay(0);
+	
+	GPIO_PORTA_DATA_R &= 0x1F;
+	
+	delay(2);
+}
+
+void SEG_data(unsigned char dat){
+	GPIO_PORTA_DATA_R &= 0x3F;
+	GPIO_PORTA_DATA_R |= 0x20;
+	GPIO_PORTB_DATA_R = dat;
+	GPIO_PORTA_DATA_R |= 0x80;
+	
+	delay(0);
+	
+	GPIO_PORTA_DATA_R &= 0x1F;
+	
+	delay(2);
+}
 int main() {
     init();
     while (1)
