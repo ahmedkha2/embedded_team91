@@ -96,6 +96,38 @@ void UART0_write(char c){
     while((UART0_FR_R & UART_FR_TXFF) != 0);
     UART0_DR_R = c;
 }
+void UART1_Init(void){
+    SYSCTL_RCGCUART_R |= 0x02;
+    while((SYSCTL_PRUART_R & 0x02) == 0);
+    SYSCTL_RCGCGPIO_R |= 0x02;
+        while((SYSCTL_PRGPIO_R & 0x02) == 0);
+
+      GPIO_PORTB_CR_R |= 0x1F;
+    GPIO_PORTB_AMSEL_R &= ~0x1F;
+    GPIO_PORTB_AFSEL_R |= 0x03;
+    GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R & ~0xFF) | (GPIO_PCTL_PB0_U1RX | GPIO_PCTL_PB1_U1TX);
+    GPIO_PORTB_DEN_R |= 0x1F;
+    GPIO_PORTB_DIR_R |= 0x1E;
+    GPIO_PORTB_DIR_R &= ~0x01;
+
+    UART1_CTL_R &= ~UART_CTL_UARTEN;
+    //set buad rate devider
+    UART1_IBRD_R = 104;
+    UART1_FBRD_R = 11;
+      UART1_LCRH_R = (UART_LCRH_WLEN_8 | UART_LCRH_FEN);
+    UART1_CTL_R |= (UART_CTL_UARTEN | UART_CTL_RXE | UART_CTL_TXE);
+}
+
+char UART1_read(void){
+    while((UART1_FR_R & 0x10) == 0x10);
+    return UART1_DR_R & 0xFF;
+}
+void delay(int d){//d=delay in milliseconds
+    int d1,d2;
+    for(d1=0; d1<d; d1++){
+        for(d2=0; d2<3180; d2++){}
+    }
+}
 void discheck(int dist) {
 
     if (dist > 100) {
