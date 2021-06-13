@@ -128,6 +128,51 @@ void delay(int d){//d=delay in milliseconds
         for(d2=0; d2<3180; d2++){}
     }
 }
+double getLongitude(char* str) {
+    int i;
+    double deg = 0, degm = 10, min = 0, minm = 10, sec = 0, secm = 10000, seconds;
+    for (i = 0; i < 10;i++) {
+        if (i < 2) {
+            deg += (str[i] - '0') * degm;
+            degm = degm / 10;
+        }
+        else if (i >= 2 && i < 4) {
+            min += (str[i] - '0') * minm;
+            minm = minm / 10;
+        }
+        else if (i >= 5 && i < 10) {
+            sec += (str[i] - '0') * secm;
+            secm = secm / 10;
+        }
+    }
+    seconds = (double)sec / 1000;
+    return  deg + (min / 60) + (seconds / 3600);
+
+}
+
+double getlatitude(char* str) {
+    int i;
+    double deg2 = 0, degm2 = 10, min2 = 0, minm2 = 10, sec2 = 0, secm2 = 10000, seconds2;
+    for (i = 0; i < 10;i++) {
+        if (i < 2)  {
+            deg2 += (str[i] - '0') * degm2;
+            degm2 = degm2 / 10;
+        }
+        else if (i >= 2 && i < 4) {
+            min2 += (str[i] - '0') * minm2;
+            minm2 = minm2 / 10;
+        }
+        else if (i >= 5 && i < 10) {
+            sec2 += (str[i] - '0') * secm2;
+            secm2 = secm2 / 10;
+        }
+
+    }
+    seconds2 = (double)sec2 / 1000;
+    return deg2 + (min2 / 60) + (seconds2 / 3600);
+
+}
+
 void discheck(int dist) {
 
     if (dist > 100) {
@@ -207,18 +252,10 @@ void SEG_distance_display(int dist){
     delay(500);
 }
 int main() {
-    init();
-    while (1)
-    {
-	int distance = 90;
-  	init();
-	
-	//turning the led on when ditance > 100
-	while(1){
-	SEG_distance_display(distance);
-	discheck(distance);
-	distance++;
-
-    }
-}
+   UART0_Init();
+   UART1_Init();
+		
+   while(1){
+	UART0_write(UART1_read());	
+   }
 }
