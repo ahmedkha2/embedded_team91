@@ -2,3 +2,4 @@
 (ahmedkha2) =>> ahmed khaled mohamed rashad 1801215
 (Darshking55)=>> Mostafa Mohamed Nageb 1809079
 (magicalOrc) =>> Mohamed Hussein Ahmed Mohamed 1701178
+Most of the functions we have tried didnt work to convert the data from the gps to doubles to use in the function we already have to calculate the distance 
