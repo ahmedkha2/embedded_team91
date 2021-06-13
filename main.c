@@ -182,12 +182,7 @@ void discheck(int dist) {
                GPIO_PORTF_DATA_R |= 0x00;
     }
 }
-void delay(int d){//d=delay in milliseconds
-	int d1,d2;
-	for(d1=0; d1<d; d1++){
-		for(d2=0; d2<3180; d2++){}
-	}
-}
+
 
 void SEG_command(unsigned char comm){
 	GPIO_PORTA_DATA_R&= 0x1F;
